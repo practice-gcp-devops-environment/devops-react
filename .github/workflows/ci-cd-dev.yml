@@ -36,7 +36,7 @@ jobs:
         run: |
           docker buildx build --push \
             --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} \
-            --tag asia-northeast3-docker.pkg.dev/${{ secrets.ORG_DEV_GCP_PROJECT_ID }}/${{ secrets.ORG_DEV_GCP_REGISTRY_NAME }}/flow-react-dev:${{ github.sha }}${{ github.run_attempt }} .
+            --tag asia-northeast3-docker.pkg.dev/${{ secrets.ORG_DEV_GCP_PROJECT_ID }}/${{ secrets.ORG_DEV_GCP_REGISTRY_NAME }}/devops-react-dev:${{ github.sha }}${{ github.run_attempt }} .
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
 
       - name: Update manifest
         run: |
-          sed -i "s|image: .*|image: asia-northeast3-docker.pkg.dev/${{ secrets.ORG_DEV_GCP_PROJECT_ID }}/${{ secrets.ORG_DEV_GCP_REGISTRY_NAME }}/flow-react-dev:${{ github.sha }}${{ github.run_attempt }}|" manifests/dev/devops-react/deployment.yaml
+          sed -i "s|image: .*|image: asia-northeast3-docker.pkg.dev/${{ secrets.ORG_DEV_GCP_PROJECT_ID }}/${{ secrets.ORG_DEV_GCP_REGISTRY_NAME }}/devops-react-dev:${{ github.sha }}${{ github.run_attempt }}|" manifests/dev/devops-react/deployment.yaml
 
       - name: Commit and push changes
         working-directory: manifests
@@ -60,5 +60,5 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add .
-          git commit -m "Update image to flow-react-dev:${{ github.sha }}${{ github.run_attempt }}"
+          git commit -m "Update image to devops-react-dev:${{ github.sha }}${{ github.run_attempt }}"
           git push
