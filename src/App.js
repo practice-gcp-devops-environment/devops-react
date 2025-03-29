@@ -49,7 +49,7 @@ function App() {
     } catch (err) {
       console.error(err);
       setMessage('에러 발생!');
-    }
+    } 
   };
 
   return (
