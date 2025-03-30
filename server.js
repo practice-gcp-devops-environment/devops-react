@@ -2,6 +2,11 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+// ✅ 로그 찍기
+// app.use(morgan('combined'));
+// 또는
+app.use(morgan('dev')); // 개발환경에 더 보기 쉬운 포맷
+
 // React 빌드된 정적 파일 서빙
 app.use(express.static(path.join(__dirname, 'build')));
 
